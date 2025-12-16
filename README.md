@@ -1,18 +1,28 @@
 <h4 align="center"> 
-    🚧 API de Gestão de Leads e Inteligência de Vendas 🚧
+   🌱 AgroMaq API – Gestão de Leads e Inteligência de Vendas
 </h4>
 
 <p align="center">
-  <img src="https://img.shields.io/static/v1?label=STATUS&message=EM ANDAMENTO &color=red&style=for-the-badge"/>
+  <img src="https://img.shields.io/static/v1?label=STATUS&message=EM%20ANDAMENTO&color=red&style=for-the-badge"/>
 </p>
-
 
 # 📊 API de Gestão de Leads e Inteligência de Vendas
 
 Esta é uma API desenvolvida para gerenciar o ciclo de vida de leads, simular um ERP de produtos e fornecer métricas para dashboards de vendas.  
 O projeto foi construído como parte do curso de Backend, utilizando Python, Flask e PostgreSQL.
 
-API de Gestão de Leads e Inteligência de Vendas
+# 📌 Sobre o Projeto
+O AgroMaq API é uma solução desenvolvida para revendas de peças e máquinas agrícolas, com foco em gestão de leads B2B e inteligência de vendas.
+O projeto simula um ERP de produtos e fornece métricas para dashboards, permitindo uma visão clara do ciclo de vida dos clientes e propostas comerciais.
+
+# 🎯 Objetivos
+Criar uma API robusta para gerenciar o ciclo de vida de leads.
+
+Simular uma base de produtos (ERP) com peças e máquinas agrícolas.
+
+Fornecer métricas e indicadores para dashboards de vendas.
+
+Garantir uma interface limpa e tabular, facilitando o uso por empresas e fazendeiros.
 
 
 ## 🚀 Tecnologias Utilizadas
@@ -27,6 +37,7 @@ API de Gestão de Leads e Inteligência de Vendas
 
 
 ## 👨‍💻 Autor
+AgroMaq API foi desenvolvido como projeto acadêmico por:
 <table>
   <tr>
     <td align="center">
@@ -39,3 +50,9 @@ API de Gestão de Leads e Inteligência de Vendas
     </td>
   </tr>
 </table>
+
+
+## 🏆 Créditos
+👨‍🏫 Orientação:**Professor(a) Márcio Bigolin**
+
+🏫 Instituição:**IFRS - Instituto Federal do RS/Campus Canoas & Instituto Hardware BR**
