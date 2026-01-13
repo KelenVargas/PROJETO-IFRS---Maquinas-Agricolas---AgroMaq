@@ -16,4 +16,18 @@ def index():
         return jsonify({"erro": "Banco de dados não está funcionando"})
     
     
+# Rota de login
     
+@index_bp.route("/auth/login", methods=["POST"]) 
+def login(): 
+    data = request.get_json() 
+    username = data.get("username")
+    password = data.get("password") #validação fixa
+    if username == "admin" and password == "1234":
+        return jsonify({
+            "success": True, 
+            "message": "Login realizado com sucesso! Bem-vindo ao sistema AgroMaq."})
+    else:
+        return jsonify({ 
+            "success": False, 
+            "message": "Usuário ou senha inválidos. Tente novamente." })
