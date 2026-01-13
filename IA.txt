@@ -1,0 +1,2 @@
+Usei a IA para a criação das tabelas, informei a ela os nomes das tabelas e os atributos que queria.
+Usei a IA para me retornar os valores os dados que iria inserir nos values.
