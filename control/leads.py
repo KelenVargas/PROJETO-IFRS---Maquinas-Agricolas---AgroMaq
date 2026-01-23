@@ -25,6 +25,12 @@ def create_produtor():
     if not data.get("cpf") and not data.get("cnpj"): 
         return jsonify({"error": "É obrigatório informar CPF ou CNPJ"}), 400
     
+    if data.get("cpf") and len(data.get("cpf")) != 11:
+        return jsonify({"error": "CPF deve ter exatamente 11 dígitos"}), 400
+
+    if data.get("cnpj") and len(data.get("cnpj")) != 14:
+        return jsonify({"error": "CNPJ deve ter exatamente 14 dígitos"}), 400
+    
     sql_query = text("""
         INSERT INTO produtor (nome, cpf, cnpj, telefone, email, tipo_cultura, tamanho_area, endereco)
         VALUES (:nome, :cpf, :cnpj, :telefone, :email, :tipo_cultura, :tamanho_area, :endereco)
@@ -50,7 +56,13 @@ def create_produtor():
 # PUT - atualizar produtor
 @produtor_bp.route('/leads/<int:id_produtor>', methods=['PUT'])
 def update_produtor(id_produtor):
-    data = request.json
+    data = request.form
+    if data.get("cpf") and len(data.get("cpf")) != 11:
+        return jsonify({"error": "CPF deve ter exatamente 11 dígitos"}), 400
+
+    if data.get("cnpj") and len(data.get("cnpj")) != 14:
+        return jsonify({"error": "CNPJ deve ter exatamente 14 dígitos"}), 400
+
     sql_query = text("""
         UPDATE produtor
         SET nome=:nome, cpf=:cpf, cnpj=:cnpj, telefone=:telefone, email=:email,
