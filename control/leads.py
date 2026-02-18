@@ -21,7 +21,10 @@ def get_all_produtores():
 def create_produtor():
     data = request.form  # pega os dados do form-data
     
-    # validação antes de inserir
+    # ---- Validações ----
+    if not data.get("nome"):
+        return jsonify({"error": "O campo 'nome' é obrigatório"}), 400
+    
     if not data.get("cpf") and not data.get("cnpj"): 
         return jsonify({"error": "É obrigatório informar CPF ou CNPJ"}), 400
     
@@ -31,9 +34,16 @@ def create_produtor():
     if data.get("cnpj") and len(data.get("cnpj")) != 14:
         return jsonify({"error": "CNPJ deve ter exatamente 14 dígitos"}), 400
     
+    # --- NOVA LÓGICA SCORE ---
+    # Se tiver email E telefone = 100, senão = 50
+    if data.get("email") and data.get("telefone"):
+        score = 100
+    else:
+        score = 50
+    
     sql_query = text("""
-        INSERT INTO produtor (nome, cpf, cnpj, telefone, email, tipo_cultura, tamanho_area, endereco)
-        VALUES (:nome, :cpf, :cnpj, :telefone, :email, :tipo_cultura, :tamanho_area, :endereco)
+        INSERT INTO produtor (nome, cpf, cnpj, telefone, email, tipo_cultura, tamanho_area, endereco, score)
+        VALUES (:nome, :cpf, :cnpj, :telefone, :email, :tipo_cultura, :tamanho_area, :endereco, :score)
     """)
     try:
         params = {
@@ -44,11 +54,12 @@ def create_produtor():
             "email": data.get("email"),
             "tipo_cultura": data.get("tipo_cultura"),
             "tamanho_area": data.get("tamanho_area"),
-            "endereco": data.get("endereco")
+            "endereco": data.get("endereco"),
+            "score": score
         }
         db.session.execute(sql_query, params)
         db.session.commit()
-        return jsonify({"message": "Produtor criado com sucesso!"}), 201
+        return jsonify({"message": f"Produtor criado com sucesso! Score atribuído: {score}"}), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -62,7 +73,7 @@ def update_produtor(id_produtor):
 
     if data.get("cnpj") and len(data.get("cnpj")) != 14:
         return jsonify({"error": "CNPJ deve ter exatamente 14 dígitos"}), 400
-
+    
     sql_query = text("""
         UPDATE produtor
         SET nome=:nome, cpf=:cpf, cnpj=:cnpj, telefone=:telefone, email=:email,
