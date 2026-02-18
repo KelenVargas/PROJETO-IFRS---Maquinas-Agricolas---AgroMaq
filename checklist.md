@@ -16,15 +16,15 @@ e Lead (baseado na estrutura do doc original: id, nome, status, score) .
 *Mês 2: Core Business (CRUD de Leads e "ERP")*
 • Foco: Regras de negócio e manipulação de dados principais.
 • Entregáveis (Git):
-• [ ] CRUD de Leads: Rotas GET, POST, PUT, DELETE para /leads.
+• [x] CRUD de Leads: Rotas GET, POST, PUT, DELETE para /leads.
 • [x] Simulação ERP: Criar tabela Produto
 • [x] Criar dados ficticions uma boa ideia de pesquisa é um script Python (seeder) que
 popula o banco com 50 produtos fictícios para rodar sem a necessidade do flask ou
 em uma rota de testes.
-• [ ] Lógica de Score: Ao criar um Lead, se ele tiver email E telefone, score =
+• [X] Lógica de Score: Ao criar um Lead, se ele tiver email E telefone, score =
 100, senão score = 50.
-• [ ] Validação: Impedir cadastro de Lead sem nome.
-• [ ] Criar todos os Cruds e ir salvando as collections no Postman (adicionar o
+• [X] Validação: Impedir cadastro de Lead sem nome.
+• [x] Criar todos os Cruds e ir salvando as collections no Postman (adicionar o
 professor como colaborador).
 ----------------------------------------------------------------------------------------------------------
 
