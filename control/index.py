@@ -18,10 +18,11 @@ def index():
     
 # Rota de login admin
     
-@index_bp.route("/auth/login", methods=["POST"]) #pronto e testado
-def login(): 
+@index_bp.route("/auth/loginAdmin", methods=["POST"]) #pronto e testado
+def loginAdmin(): 
     username = request.form.get("username")
     password = request.form.get("password") #validação fixa para um admin
+    
     if username == "admin" and password == "1234":
         return jsonify({
             "success": True, 
@@ -34,6 +35,33 @@ def login():
    
 
 
+@index_bp.route("/auth/login", methods=["POST"])
+def login(): 
    
+    username = request.form.get("username")
+    password = request.form.get("password")
+   
+    sql = text("SELECT id, usuario, email FROM usuarios WHERE usuario = :u AND senha = :p")
+    
+    try:
+       
+        result = db.session.execute(sql, {"u": username, "p": password}).fetchone()
+
+     
+        if result:
+            return jsonify({
+                "success": True, 
+                "message": f"Bem-vindo, {username}! Login realizado com sucesso.",
+                "user_id": result[0] 
+            })
+        else:
+         
+            return jsonify({ 
+                "success": False, 
+                "message": "Usuário ou senha inválidos no banco de dados." 
+            }), 401 
+
+    except Exception as e:
+        return jsonify({"success": False, "message": f"Erro de conexão: {str(e)}"}), 500
         
     
