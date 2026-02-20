@@ -1,7 +1,7 @@
 from flask import Flask
 #import do banco de dados
 from conf.database import init_db
-from models import Produtos, ItensProposta
+from models import Produtos, ItensProposta, Proposta, Produtor, Usuarios
 
 # módulos 
 from control.index import index_bp
