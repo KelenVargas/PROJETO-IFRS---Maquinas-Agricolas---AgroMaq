@@ -62,6 +62,7 @@ def login():
             }), 401 
 
     except Exception as e:
+        db.session.rollback()
         return jsonify({"success": False, "message": f"Erro de conexão: {str(e)}"}), 500
         
     
