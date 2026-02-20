@@ -14,7 +14,8 @@ def get_all_produtores():
         json_data = [dict(row) for row in relatorio]
         return jsonify(json_data)
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        db.session.rollback()
+        return jsonify({"error": "Erro ao listar produtores", "details": str(e)}), 500
 
 # POST - criar novo produtor
 @produtor_bp.route('/leads', methods=['POST'])
@@ -61,7 +62,8 @@ def create_produtor():
         db.session.commit()
         return jsonify({"message": f"Produtor criado com sucesso! Score atribuído: {score}"}), 201
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        db.session.rollback()
+        return jsonify({"error": "Erro ao processar os dados no banco", "details": str(e)}), 500
 
 
 # PUT - atualizar produtor
@@ -74,18 +76,40 @@ def update_produtor(id_produtor):
     if data.get("cnpj") and len(data.get("cnpj")) != 14:
         return jsonify({"error": "CNPJ deve ter exatamente 14 dígitos"}), 400
     
+    # --- RECALCULAR SCORE NA ATUALIZAÇÃO ---
+    if data.get("email") and data.get("telefone"):
+        score = 100
+    else:
+        score = 50
+    
     sql_query = text("""
         UPDATE produtor
         SET nome=:nome, cpf=:cpf, cnpj=:cnpj, telefone=:telefone, email=:email,
-            tipo_cultura=:tipo_cultura, tamanho_area=:tamanho_area, endereco=:endereco
+            tipo_cultura=:tipo_cultura, tamanho_area=:tamanho_area, endereco=:endereco,
+            score=:score
         WHERE id_produtor=:id_produtor
     """)
     try:
-        db.session.execute(sql_query, {**data, "id_produtor": id_produtor})
+        params = {
+            "nome": data.get("nome"),
+            "cpf": data.get("cpf"),
+            "cnpj": data.get("cnpj"),
+            "telefone": data.get("telefone"),
+            "email": data.get("email"),
+            "tipo_cultura": data.get("tipo_cultura"),
+            "tamanho_area": data.get("tamanho_area"),
+            "endereco": data.get("endereco"),
+            "score": score,
+            "id_produtor": id_produtor
+        }
+
+        db.session.execute(sql_query, params)
         db.session.commit()
-        return jsonify({"message": "Produtor atualizado com sucesso!"})
+        return jsonify({"message": f"Produtor atualizado! Novo Score: {score}"})
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        db.session.rollback()
+        return jsonify({"error": "Erro ao processar os dados no banco", "details": str(e)}), 500
+        
 
 # DELETE - remover produtor
 @produtor_bp.route('/leads/<int:id_produtor>', methods=['DELETE'])
@@ -96,5 +120,5 @@ def delete_produtor(id_produtor):
         db.session.commit()
         return jsonify({"message": "Produtor removido com sucesso!"})
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
+        db.session.rollback()
+        return jsonify({"error": "Erro ao processar os dados no banco", "details": str(e)}), 500

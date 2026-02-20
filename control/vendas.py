@@ -35,11 +35,31 @@ def adicionar_item():
     
 @vendas_bp.route('/proposta/<int:id_proposta>/total', methods=['GET'])
 def total_proposta(id_proposta):
-    # SQL que soma (quantidade * preco_unitario) de todos os itens daquela proposta
-    sql = text("SELECT SUM(quantidade * preco_unitario) FROM itens_proposta WHERE id_proposta = :id")
-    result = db.session.execute(sql, {"id": id_proposta}).fetchone()
+    # SQL que multiplica quantidade por preço e soma tudo
+    sql = text("""
+        SELECT SUM(quantidade * preco_unitario) 
+        FROM itens_proposta 
+        WHERE id_proposta = :id
+    """)
+    
+    resultado = db.session.execute(sql, {"id": id_proposta}).fetchone()
+    total = resultado[0] if resultado[0] else 0
     
     return jsonify({
         "id_proposta": id_proposta,
-        "valor_total": float(result[0]) if result[0] else 0
+        "total_acumulado": float(total)
     })
+    
+@vendas_bp.route('/produtos', methods=['GET'])
+def listar_produtos():
+
+    sql = text("SELECT * FROM produtos")
+    try:
+        result = db.session.execute(sql)
+      
+        relatorio = result.mappings().all()
+        json_data = [dict(row) for row in relatorio]
+        return jsonify(json_data)
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": "Erro ao listar produtos", "details": str(e)}), 500
