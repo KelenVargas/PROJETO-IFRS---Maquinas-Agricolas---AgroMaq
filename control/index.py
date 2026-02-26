@@ -1,6 +1,7 @@
 from flask import Flask, Blueprint, request, jsonify
 from sqlalchemy import text
 from flask_sqlalchemy import SQLAlchemy #importar certinho
+import os
 
 from conf.database import db
 
@@ -23,7 +24,7 @@ def loginAdmin():
     username = request.form.get("username")
     password = request.form.get("password") #validação fixa para um admin
     
-    if username == "admin" and password == "1234":
+    if username == os.getenv("ADMIN_USER") and password == os.getenv("ADMIN_PASS"):
         return jsonify({
             "success": True, 
             "message": "Login realizado com sucesso! Bem-vindo ao sistema AgroMaq."})
