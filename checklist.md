@@ -3,7 +3,7 @@
 • Entregáveis (Git):
 • [x] Repositório criado com .gitignore (python) e requirements.txt.
 • [x] Conexão com PostgreSQL configurada
-        • [ ] Opcional pesquisar o uso de variáveis de ambiente .env (vamos precisar
+        • [x] Opcional pesquisar o uso de variáveis de ambiente .env (vamos precisar
         no RENDER).
 • [x] Modelagem dos dados em JSON para entender o problema (objetos)
 • [x] Modelagem de Dados (SQLAlchemy ou SQL Puro): Criação das tabelas User
@@ -31,7 +31,7 @@ professor como colaborador).
 *Mês 3: Métricas, Documentação e Deploy*
 • Foco: Inteligência de dados e publicação.
 • Entregáveis (Git):
-• [ ] Rota GET /dashboard/metrics: Retornar JSON com contagem de leads por
+• [X] Rota GET /dashboard/metrics: Retornar JSON com contagem de leads por
 status e valor total de vendas simuladas.
 • [ ] Collection do Postman: Arquivo .json exportado com todas as rotas testadas e
 funcionando.
