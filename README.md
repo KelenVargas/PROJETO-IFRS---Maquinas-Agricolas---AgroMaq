@@ -3,38 +3,59 @@
 </h4>
 
 <p align="center">
-  <img src="https://img.shields.io/static/v1?label=STATUS&message=EM%20ANDAMENTO&color=red&style=for-the-badge"/>
+  <img src="https://img.shields.io/static/v1?label=STATUS&message=CONCLUÍDO&color=green&style=for-the-badge"/>
+  <img src="https://img.shields.io/static/v1?label=DEPLOY&message=RENDER&color=blue&style=for-the-badge"/>
 </p>
 
 # 📊 API de Gestão de Leads e Inteligência de Vendas
 
-Esta é uma API desenvolvida para gerenciar o ciclo de vida de leads, simular um ERP de produtos e fornecer métricas para dashboards de vendas.  
-O projeto foi construído como parte do curso de Backend, utilizando Python, Flask e PostgreSQL.
+Esta é uma API robusta desenvolvida para gerenciar o ciclo de vida de leads, simular um ERP de produtos agrícolas e fornecer métricas estratégicas para tomada de decisão.
+O projeto foi construído utilizando **Python, Flask e PostgreSQL**, seguindo uma arquitetura modular e segura.
 
 # 📌 Sobre o Projeto
-O AgroMaq API é uma solução desenvolvida para revendas de peças e máquinas agrícolas, com foco em gestão de leads B2B e inteligência de vendas.
-O projeto simula um ERP de produtos e fornece métricas para dashboards, permitindo uma visão clara do ciclo de vida dos clientes e propostas comerciais.
+O AgroMaq API é uma solução voltada para revendas de máquinas e insumos, com foco em gestão de leads B2B. A API permite desde o cadastro qualificado de produtores até a análise de faturamento por tipo de cultura, garantindo inteligência competitiva para o negócio.
 
-# 🎯 Objetivos
-Criar uma API robusta para gerenciar o ciclo de vida de leads.
-
-Simular uma base de produtos (ERP) com peças e máquinas agrícolas.
-
-Fornecer métricas e indicadores para dashboards de vendas.
-
-Garantir uma interface limpa e tabular, facilitando o uso por empresas e fazendeiros.
-
-
-## 🚀 Tecnologias Utilizadas
-
-- Linguagem: Python 3+
-- Framework: Flask
-- Banco de Dados: PostgreSQL
-- Modelagem de Dados: (SQL Puro)
-- Deploy: Render
-- Ferramentas: VSCode, Postman, Git
+## 🚀 Funcionalidades Implementadas
+- **Autenticação**: Acesso restrito via login administrativo.
+- **Gestão de Leads**: Cadastro com validações de CPF/CNPJ e sistema de **Score Automático** (Leads Ouro/Bronze).
+- **Simulação de ERP**: Listagem de produtos (máquinas e sementes) via banco de dados.
+- **Vendas Relacionais**: Sistema de Propostas e Itens de Proposta vinculados a produtores.
+- **Dashboard de Inteligência**: 
+    - Contagem de leads por status.
+    - Valor total de vendas simuladas.
+    - Análise de faturamento segmentado por tipo de cultura (Soja, Milho, etc).
 
 
+## 🛠️ Tecnologias Utilizadas
+- **Linguagem**: Python 3+
+- **Framework**: Flask
+- **Banco de Dados**: PostgreSQL (SQL Puro com SQLAlchemy)
+- **Segurança**: Variáveis de Ambiente (`python-dotenv`)
+- **Deploy**: Render
+
+## 📋 Endpoints Principais
+| Método | Rota | Descrição |
+| :--- | :--- | :--- |
+| `POST` | `/login` | Autenticação do administrador. |
+| `POST` | `/leads` | Cria um novo produtor com cálculo de Score. |
+| `POST` | `/vendas` | Registra uma nova venda (Proposta + Itens). |
+| `GET` | `/dashboard/metricas` | Retorna (Total leads e vendas). |
+| `GET` | `/dashboard/faturamento` | Retorna o lucro segmentado por cultura. |
+
+
+## ⚙️ Como rodar o projeto localmente
+1. Clone o repositório.
+2. Crie um ambiente virtual: `python -m venv venv`.
+3. Instale as dependências: `pip install -r requirements.txt`.
+4. Configure o arquivo `.env` com suas credenciais (`DB_URL`, `ADMIN_PASS`).
+5. Popule o banco (opcional): `python seeder.py`.
+6. Inicie a API: `python app.py`.
+
+
+> **Nota:** A Collection do Postman para testes rápidos está disponível na raiz: `AgroMaq_Collection.json`.
+
+## 🔗 Link de Deploy
+A API está disponível publicamente em: [INSIRA_SEU_LINK_DO_RENDER_AQUI]
 
 ## 👨‍💻 Autor
 AgroMaq API foi desenvolvido como projeto acadêmico por:
