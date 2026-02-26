@@ -19,7 +19,7 @@ def get_all_produtores():
 
 # POST - criar novo produtor
 @produtor_bp.route('/leads', methods=['POST'])
-def create_produtor():
+def criar_produtor():
     data = request.form  # pega os dados do form-data
     
     # ---- Validações ----
