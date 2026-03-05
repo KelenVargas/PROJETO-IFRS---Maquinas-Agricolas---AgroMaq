@@ -8,5 +8,5 @@ db = SQLAlchemy()
 
 def init_db(app):
     # Puxa a URL do banco de forma protegida
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_URL')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
     db.init_app(app)
