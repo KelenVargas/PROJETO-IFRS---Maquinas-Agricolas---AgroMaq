@@ -47,15 +47,15 @@ O AgroMaq API é uma solução voltada para revendas de máquinas e insumos, com
 1. Clone o repositório.
 2. Crie um ambiente virtual: `python -m venv venv`.
 3. Instale as dependências: `pip install -r requirements.txt`.
-4. Configure o arquivo `.env` com suas credenciais (`DB_URL`, `ADMIN_PASS`).
+4. Configure o arquivo `.env` com suas credenciais (`DATABASE_URL`, `ADMIN_PASS`).
 5. Popule o banco (opcional): `python seeder.py`.
 6. Inicie a API: `python app.py`.
 
 
-> **Nota:** A Collection do Postman para testes rápidos está disponível na raiz: `AgroMaq_Collection.json`.
+> **Nota:** A Collection do Postman para testes rápidos está disponível na raiz: pasta doc `AgroMaq_Collection.json`.
 
 ## 🔗 Link de Deploy
-A API está disponível publicamente em: [INSIRA_SEU_LINK_DO_RENDER_AQUI]
+A API está disponível publicamente em: [https://projeto-ifrs-maquinas-agricolas-agromaq.onrender.com/]
 
 ## 👨‍💻 Autor
 AgroMaq API foi desenvolvido como projeto acadêmico por:
